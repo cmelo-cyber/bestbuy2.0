@@ -1,15 +1,17 @@
 """In this file the product class is defined"""
 
 class Product:
-    try:
-        def __init__(self, name, price, quantity):
-            self.name = name
-            self.price = price
-            self.quantity = quantity
-            self.active = True
 
-    except Exception as e:
-        print("Invalid input")
+    def __init__(self, name, price, quantity):
+        if not name or price < 0 or quantity < 0:
+            raise Exception("Invalid input")
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        self.active = True
+
+
+
 
     def get_quantity(self)-> int:
         return self.quantity

@@ -2,16 +2,23 @@
 
 import products
 import store
+from products import Limited_Product
 
-
-
+# setup initial stock of inventory
+# product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
+#                  products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
+#                  products.Product("Google Pixel 7", price=500, quantity=250)
+#                ]
+#
+# best_buy = store.Store(product_list)
 
 # setup initial stock of inventory
 product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
                  products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                 products.Product("Google Pixel 7", price=500, quantity=250)
+                 products.Product("Google Pixel 7", price=500, quantity=250),
+                 products.No_Storage_Product("Windows License", price=125),
+                 products.Limited_Product("Shipping", price=10, quantity=250, limit=1)
                ]
-
 best_buy = store.Store(product_list)
 
 #Define a Dictionary for the order function
@@ -57,7 +64,7 @@ def start(store):
         try:
             print(f"******\nOrder made! Total payment: ${best_buy.order(orders)}")
         except Exception as e:
-            print(f"{e} you didnt order anything")
+            print(f"\n{e} you didnt order anything")
 
     elif choice == 4:
         return True
@@ -96,6 +103,10 @@ def make_an_order():
             print("Please fill both fields")
             continue
 
+        if  isinstance(prod_choices[int(order_number)], Limited_Product)  and int(amount) > prod_choices[int(order_number)].limit:
+            # soll checken, ob die bestellung einen limit besitzt und den menge mit dem limit vergleichen
+            print("Bestell-Limit überschritten")
+            continue
 
         try:
             amount = int(amount)
@@ -127,3 +138,4 @@ def main():
 
 if __name__=="__main__":
     main()
+

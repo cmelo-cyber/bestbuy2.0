@@ -1,4 +1,6 @@
 """In this file the product class is defined"""
+from promotions import Promotion
+
 
 class Product:
 
@@ -9,7 +11,7 @@ class Product:
         self.price = price
         self.quantity = quantity
         self.active = True
-
+        self.promotion = None # This attribute is the object of subclass promotion (one of three half,percent,third..)
 
     def get_quantity(self)-> int:
         return self.quantity
@@ -18,6 +20,14 @@ class Product:
         self.quantity = quantity
         if self.quantity == 0:
             self.active = False
+
+    def get_promotion(self)-> int:
+        return self.promotion
+
+    def set_promotion(self, promotion):
+        self.promotion = promotion
+        if self.promotion == "":
+            self.promotion = None
 
     def is_active(self)->bool:
         return self.active
@@ -37,8 +47,14 @@ class Product:
                 f"Nicht genügend Produkte verfügbar. Bestand: {self.quantity}"
             )
         else:
-            self.quantity -= quantity
-        return self.price * quantity
+            if self.promotion:
+                total = self.promotion.apply_promotion(self, quantity) # self here is the product object which is handed to apply_promo
+            else:
+                self.quantity -= quantity
+                total = self.price * quantity
+        # if there is promotion  if no return self.price * quantity
+        #otherwise if promotion is activ: call applypromotion
+        return total
 
 
 

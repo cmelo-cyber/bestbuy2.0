@@ -3,7 +3,7 @@
 import products
 import store
 from products import Limited_Product
-
+from promotions import SecondHalfPrice,PercentDiscount,ThirdOneFree
 # setup initial stock of inventory
 # product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
 #                  products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
@@ -13,12 +13,30 @@ from products import Limited_Product
 # best_buy = store.Store(product_list)
 
 # setup initial stock of inventory
+# product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
+#                  products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
+#                  products.Product("Google Pixel 7", price=500, quantity=250),
+#                  products.No_Storage_Product("Windows License", price=125),
+#                  products.Limited_Product("Shipping", price=10, quantity=250, limit=1)
+#                ]
+
 product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
                  products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
                  products.Product("Google Pixel 7", price=500, quantity=250),
                  products.No_Storage_Product("Windows License", price=125),
                  products.Limited_Product("Shipping", price=10, quantity=250, limit=1)
                ]
+
+# Create promotion catalog
+second_half_price = SecondHalfPrice("Second Half price!")
+third_one_free = ThirdOneFree("Third One Free!")
+thirty_percent = PercentDiscount("30% off!", percent=50)
+
+# Add promotions to products
+product_list[0].set_promotion(second_half_price)
+product_list[1].set_promotion(third_one_free)
+product_list[2].set_promotion(thirty_percent)
+
 best_buy = store.Store(product_list)
 
 #Define a Dictionary for the order function

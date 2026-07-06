@@ -39,7 +39,7 @@ class Product:
         self.active = False
 
     def show(self):
-        print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
+        print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Promotion:{self.promotion.name}")
 
     def buy(self, quantity)->float:
         if self.quantity < quantity:

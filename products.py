@@ -3,7 +3,8 @@ from promotions import Promotion
 
 
 class Product:
-
+    """Diese Klasse stellt einzelne Produkte dar.
+    Sie hat folgende Attribute (Name, Price, Quantity, Active, Promotion: class)und Methoden wie show und buy"""
     def __init__(self, name, price, quantity):
         if not name or price < 0 or quantity < 0:
             raise Exception("Invalid input")
@@ -11,37 +12,48 @@ class Product:
         self.price = price
         self.quantity = quantity
         self.active = True
-        self.promotion = None # This attribute is the object of subclass promotion (one of three half,percent,third..)
+        self.promotion = None # This attribute is the object
+        # of subclass promotion (one of three half,percent,third...)
 
     def get_quantity(self)-> int:
+        """returns quantity"""
         return self.quantity
 
     def set_quantity(self, quantity):
+        """sets quantity"""
         self.quantity = quantity
         if self.quantity == 0:
             self.active = False
 
     def get_promotion(self)-> int:
+        """returns promo"""
         return self.promotion
 
     def set_promotion(self, promotion):
+        """sets promo"""
         self.promotion = promotion
         if self.promotion == "":
             self.promotion = None
 
     def is_active(self)->bool:
+        """returns activity"""
         return self.active
 
     def active(self):
+        """sets activ"""
         self.active = True
 
     def deactive(self):
+        """sets deactiv"""
         self.active = False
 
     def show(self):
+        """Shows the product information"""
         print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Promotion:{self.promotion.name}")
 
     def buy(self, quantity)->float:
+        """Takes the amount of pieces and calculates the total.
+        It also reduces the amount in the stock and checks if there is a promotion"""
         if self.quantity < quantity:
             raise ValueError(
                 f"Nicht genügend Produkte verfügbar. Bestand: {self.quantity}"
@@ -71,6 +83,7 @@ class Product:
 # bose.set_quantity(1000)
 # bose.show()
 class NoStorageProduct(Product):
+    """This class is for products with are not stored like licenses. It inherits from product class"""
     def __init__(self, name, price, ):
         super().__init__(name, price, 0)
 
@@ -82,6 +95,7 @@ class NoStorageProduct(Product):
 
 
 class LimitedProduct(Product):
+    """This class is for products which are limited. It inherits from product class"""
     def __init__(self, name, price, quantity, limit):
         super().__init__(name, price, quantity)
         self.limit = limit
@@ -103,5 +117,3 @@ class LimitedProduct(Product):
 
         self.quantity -= quantity
         return self.price * quantity
-
-

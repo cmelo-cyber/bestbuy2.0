@@ -2,7 +2,7 @@
 
 import products
 import store
-from products import Limited_Product
+from products import LimitedProduct
 from promotions import SecondHalfPrice,PercentDiscount,ThirdOneFree
 # setup initial stock of inventory
 # product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
@@ -23,8 +23,8 @@ from promotions import SecondHalfPrice,PercentDiscount,ThirdOneFree
 product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
                  products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
                  products.Product("Google Pixel 7", price=500, quantity=250),
-                 products.No_Storage_Product("Windows License", price=125),
-                 products.Limited_Product("Shipping", price=10, quantity=250, limit=1)
+                 products.NoStorageProduct("Windows License", price=125),
+                 products.LimitedProduct("Shipping", price=10, quantity=250, limit=1)
                ]
 
 # Create promotion catalog
@@ -121,7 +121,7 @@ def make_an_order():
             print("Please fill both fields")
             continue
 
-        if  isinstance(prod_choices[int(order_number)], Limited_Product)  and int(amount) > prod_choices[int(order_number)].limit:
+        if  isinstance(prod_choices[int(order_number)], LimitedProduct)  and int(amount) > prod_choices[int(order_number)].limit:
             # soll checken, ob die bestellung einen limit besitzt und den menge mit dem limit vergleichen
             print("Bestell-Limit überschritten")
             continue

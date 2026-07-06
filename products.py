@@ -70,7 +70,7 @@ class Product:
 #
 # bose.set_quantity(1000)
 # bose.show()
-class No_Storage_Product(Product):
+class NoStorageProduct(Product):
     def __init__(self, name, price, ):
         super().__init__(name, price, 0)
 
@@ -80,7 +80,8 @@ class No_Storage_Product(Product):
     def buy(self, quantity)->float:
         return self.price * quantity
 
-class Limited_Product(Product):
+
+class LimitedProduct(Product):
     def __init__(self, name, price, quantity, limit):
         super().__init__(name, price, quantity)
         self.limit = limit
